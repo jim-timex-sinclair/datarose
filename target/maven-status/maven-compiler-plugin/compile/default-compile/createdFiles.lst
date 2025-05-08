@@ -1,0 +1,15 @@
+com\github\jpmtimexsinclair\datarose\CaseConversion$1.class
+com\github\jpmtimexsinclair\datarose\CaseConversion.class
+com\github\jpmtimexsinclair\datarose\DataObject.class
+com\github\jpmtimexsinclair\datarose\Convertable.class
+com\github\jpmtimexsinclair\datarose\DataAttribute.class
+com\github\jpmtimexsinclair\datarose\DataAttributePair.class
+com\github\jpmtimexsinclair\datarose\DataEntity.class
+com\github\jpmtimexsinclair\datarose\DataObjectType.class
+com\github\jpmtimexsinclair\datarose\RoseConversion.class
+com\github\jpmtimexsinclair\datarose\ConversionEntity.class
+com\github\jpmtimexsinclair\datarose\BaseRose.class
+com\github\jpmtimexsinclair\datarose\CaseType.class
+com\github\jpmtimexsinclair\datarose\Datarose.class
+com\github\jpmtimexsinclair\datarose\DuckDBRose.class
+com\github\jpmtimexsinclair\datarose\PostgreSQLRose.class

@@ -1,0 +1,22 @@
+-encoding
+'UTF-8'
+-protected
+--release
+17
+-sourcepath
+'C:/Users/james/Documents/NetBeansProjects/datarose/src/main/java'
+-author
+-bottom
+'Copyright &#169; 2025. All rights reserved.'
+-charset
+'UTF-8'
+-d
+'C:/Users/james/Documents/NetBeansProjects/datarose/target/reports/apidocs'
+-docencoding
+'UTF-8'
+-doctitle
+'datarose 1.0-SNAPSHOT API'
+-use
+-version
+-windowtitle
+'datarose 1.0-SNAPSHOT API'

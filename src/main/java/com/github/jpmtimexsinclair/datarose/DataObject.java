@@ -21,10 +21,22 @@ public class DataObject {
         this.comment = comment;
     }
     
+    public DataObject(String name){
+        this.name = name;
+        this.dataObjectType = DataObjectType.DATABASE;
+    }
+    
     public DataObject(String name, String comment, DataObjectType dataObjectType, DataObject parentDataObject){
         this.name = name;
         this.dataObjectType = dataObjectType;
         this.comment = comment;
+        this.parentDataObject = parentDataObject;
+    }
+    
+    //no comment
+    public DataObject(String name, DataObjectType dataObjectType, DataObject parentDataObject){
+        this.name = name;
+        this.dataObjectType = dataObjectType;
         this.parentDataObject = parentDataObject;
     }
     

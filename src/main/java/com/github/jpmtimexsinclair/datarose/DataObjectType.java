@@ -10,11 +10,6 @@ package com.github.jpmtimexsinclair.datarose;
  */
 public enum DataObjectType {
     /**
-     * Entity
-     */
-    ENTITY,
-    
-    /**
      * Database
      */
     DATABASE,
@@ -23,6 +18,11 @@ public enum DataObjectType {
      * Schema
      */
     SCHEMA,
+    
+    /**
+     * Entity
+     */
+    ENTITY,
 
     /**
      * Attribute

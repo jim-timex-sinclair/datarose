@@ -20,6 +20,8 @@ public class DataAttribute extends DataObject{
     public String dataType;
     //decided in the end that BigInteger was not needed.  DuckDB has a max
     //varchar length of 4gb, but 
+    //scratch the above...looks like I decided it 
+    //was needed.
     public BigInteger characterMaximumLength;
     //custom character properties
     public boolean isBlankTrimmed;
@@ -46,7 +48,6 @@ public class DataAttribute extends DataObject{
       "0110","0111","1000","1001","1010",
       "1011","1100","1101","1110","1111"
     };
-      
     
     //need and empty constructor....to be filled in later...
     //i think
@@ -55,7 +56,7 @@ public class DataAttribute extends DataObject{
     }
     
     /**
-     * Create a new data attribute that looks like information_schema.columns
+     * Create a new data attribute that looks like information_schema.columns with everything.
      * @param name 
      * @param comment
      * @param parentDataObject
@@ -89,8 +90,115 @@ public class DataAttribute extends DataObject{
         this.comment = comment;
     }
     
+        /**
+     * Create a new data attribute that looks like information_schema.columns for text oriented data types.
+     * @param name 
+     * @param comment
+     * @param parentDataObject
+     * @param ordinalPosition
+     * @param isNullable
+     * @param dataType
+     * @param characterMaximumLength
+     * @param isPrimaryKey
+     * @param constraintOrdinalPosition
+     * @see None
+     * @since 1.0
+     */
+    public DataAttribute(String name, DataObject parentDataObject, int ordinalPosition, boolean isNullable, String dataType, BigInteger 
+            characterMaximumLength, boolean isPrimaryKey, int constraintOrdinalPosition)
+    {
+        //parent properties
+        super(name, DataObjectType.ATTRIBUTE, parentDataObject);
+        //this properties
+        this.ordinalPosition = ordinalPosition;
+        this.isNullable = isNullable;
+        this.dataType = dataType;
+        this.characterMaximumLength = characterMaximumLength;
+        this.isPrimaryKey = isPrimaryKey;
+        this.constraintOrdinalPosition = constraintOrdinalPosition;
+    }
+    
     /**
-     * Create a new data attribute that is more basic and free form.
+     * Create a new data attribute that looks like information_schema.columns that is numeric oriented.
+     * @param name 
+     * @param parentDataObject
+     * @param ordinalPosition
+     * @param isNullable
+     * @param dataType
+     * @param numericPrecision
+     * @param numericScale
+     * @param isPrimaryKey
+     * @param constraintOrdinalPosition
+     * @see None
+     * @since 1.0
+     */
+    public DataAttribute(String name, DataObject parentDataObject, int ordinalPosition, boolean isNullable, String dataType, int numericPrecision,
+            int numericScale, boolean isPrimaryKey, int constraintOrdinalPosition)
+    {
+        //parent properties
+        super(name, DataObjectType.ATTRIBUTE, parentDataObject);
+        //this properties
+        this.ordinalPosition = ordinalPosition;
+        this.isNullable = isNullable;
+        this.dataType = dataType;
+        this.numericPrecision = numericPrecision;
+        this.numericScale = numericScale;
+        this.isPrimaryKey = isPrimaryKey;
+        this.constraintOrdinalPosition = constraintOrdinalPosition;
+    }
+    
+    /**
+     * Create a new data attribute that looks like information_schema.columns for date data types.
+     * @param name 
+     * @param parentDataObject
+     * @param ordinalPosition
+     * @param isNullable
+     * @param dataType
+     * @param datetimePrecision
+     * @param isPrimaryKey
+     * @param constraintOrdinalPosition
+     * @see None
+     * @since 1.0
+     */
+    public DataAttribute(String name, DataObject parentDataObject, int ordinalPosition, boolean isNullable, String dataType, int datetimePrecision, boolean isPrimaryKey, int constraintOrdinalPosition)
+    {
+        //parent properties
+        super(name, DataObjectType.ATTRIBUTE, parentDataObject);
+        //this properties
+        this.ordinalPosition = ordinalPosition;
+        this.isNullable = isNullable;
+        this.dataType = dataType;
+        this.datetimePrecision = datetimePrecision;
+        this.isPrimaryKey = isPrimaryKey;
+        this.constraintOrdinalPosition = constraintOrdinalPosition;
+    }
+    
+        /**
+     * Create a new data attribute that looks like information_schema.columns but only requires the basics like datatype etc. 
+     * @param name 
+     * @param parentDataObject
+     * @param ordinalPosition
+     * @param isNullable
+     * @param dataType
+     * @param isPrimaryKey
+     * @param constraintOrdinalPosition
+     * @see None
+     * @since 1.0
+     */
+    public DataAttribute(String name, DataObject parentDataObject, int ordinalPosition, boolean isNullable, String dataType, boolean isPrimaryKey, int constraintOrdinalPosition)
+    {
+        //parent properties
+        super(name, DataObjectType.ATTRIBUTE, parentDataObject);
+        //this properties
+        this.ordinalPosition = ordinalPosition;
+        this.isNullable = isNullable;
+        this.dataType = dataType;
+        this.isPrimaryKey = isPrimaryKey;
+        this.constraintOrdinalPosition = constraintOrdinalPosition;
+    }
+    
+    /**
+     * Create a new data attribute that is more basic and free form and with comment.
      * @param name 
      * @param comment
      * @param parentDataObject
@@ -109,7 +217,7 @@ public class DataAttribute extends DataObject{
     }
     
     /**
-     * Create a new data attribute that looks like information_schema.columns
+     * Create a new data attribute that looks like information_schema.columns but without the datatype specified.
      * @param name 
      * @param comment
      * @param parentDataObject

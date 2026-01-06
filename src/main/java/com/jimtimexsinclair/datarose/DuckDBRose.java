@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package com.github.jpmtimexsinclair.datarose;
+package com.jimtimexsinclair.datarose;
 import java.math.BigInteger;
 
 /**
@@ -13,10 +13,11 @@ public class DuckDBRose extends BaseRose implements Convertable  {
     
     @Override
     public ConversionEntity convertToBaseEntity(DataEntity dataEntity){
-        ConversionEntity conversionEntity = this.initializeConversionEntity(dataEntity, CaseType.CONSTANT);
+        ConversionEntity conversionEntity = initializeConversionEntity(dataEntity, CaseType.CONSTANT);
+        DataEntity baseEntity = conversionEntity.targetDataEntity;
         for(DataAttribute attribute : conversionEntity.sourceDataEntity.dataAttributeCollection)
         {   
-            DataAttributePair dataAttributePair = convertToBaseAttribute(attribute);
+            DataAttributePair dataAttributePair = convertToBaseAttribute(attribute, baseEntity);
             conversionEntity.dataAttributePairCollection.add(dataAttributePair);
             conversionEntity.targetDataEntity.dataAttributeCollection.add(dataAttributePair.targetDataAttribute);
         }
@@ -24,11 +25,12 @@ public class DuckDBRose extends BaseRose implements Convertable  {
     }
     
     @Override
-    public ConversionEntity convertFromBaseEntity(DataEntity dataEntity, CaseType caseType){
-        ConversionEntity conversionEntity = this.initializeConversionEntity(dataEntity, caseType);
+    public ConversionEntity convertFromBaseEntity(DataEntity dataEntity, CaseType caseType, DataObject parentDataObject){
+        ConversionEntity conversionEntity = initializeConversionEntity(dataEntity, caseType, parentDataObject);
+        DataEntity targetEntity = conversionEntity.targetDataEntity;
         for(DataAttribute attribute : conversionEntity.sourceDataEntity.dataAttributeCollection)
         {   
-            DataAttributePair dataAttributePair = convertToBaseAttribute(attribute);
+            DataAttributePair dataAttributePair = convertToBaseAttribute(attribute, targetEntity);
             conversionEntity.dataAttributePairCollection.add(dataAttributePair);
             conversionEntity.targetDataEntity.dataAttributeCollection.add(dataAttributePair.targetDataAttribute);
         }
@@ -37,8 +39,8 @@ public class DuckDBRose extends BaseRose implements Convertable  {
     
     //todo check data type conversion.
     @Override
-    public DataAttributePair convertToBaseAttribute(DataAttribute dataAttribute){
-        DataAttributePair dataAttributePair = this.initializeConversionAttribute(dataAttribute, CaseType.CONSTANT);
+    public DataAttributePair convertToBaseAttribute(DataAttribute dataAttribute, DataEntity baseDataEntity){
+        DataAttributePair dataAttributePair = this.initializeDataAttributePair(dataAttribute, CaseType.CONSTANT, baseDataEntity);
         //note that the source data type is lower case and the target is upper just to keep the code straight.
         switch (dataAttributePair.sourceDataAttribute.dataType.toUpperCase()){
             case "BIGINT":
@@ -197,8 +199,8 @@ public class DuckDBRose extends BaseRose implements Convertable  {
     
     //todo check data type conversion
     @Override
-    public DataAttributePair convertFromBaseAttribute(DataAttribute dataAttribute, CaseType caseType){
-        DataAttributePair dataAttributePair = this.initializeConversionAttribute(dataAttribute, caseType);
+    public DataAttributePair convertFromBaseAttribute(DataAttribute dataAttribute, CaseType caseType, DataEntity targetDataEntity){
+        DataAttributePair dataAttributePair = this.initializeDataAttributePair(dataAttribute, caseType, targetDataEntity);
         //note that the source data type is lower case and the target is upper just to keep the code straight.
         switch (dataAttributePair.sourceDataAttribute.dataType.toUpperCase()){
             case "BIGINT":

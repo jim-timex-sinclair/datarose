@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package com.github.jpmtimexsinclair.datarose;
+package com.jimtimexsinclair.datarose;
 import java.math.BigInteger;
 //import java.util.HashSet;
 //import java.util.Set;
@@ -51,8 +51,8 @@ public class DataAttribute extends DataObject{
     
     //need and empty constructor....to be filled in later...
     //i think
-    DataAttribute(String name, String comment){
-        super(name, comment);
+    DataAttribute(String name, DataObject parentDataObject){
+        super(name, DataObjectType.ATTRIBUTE, parentDataObject);
     }
     
     /**
@@ -72,8 +72,8 @@ public class DataAttribute extends DataObject{
      * @see None
      * @since 1.0
      */
-    public DataAttribute(String name, String comment, DataObject parentDataObject, int ordinalPosition, boolean isNullable, String dataType, BigInteger characterMaximumLength, int numericPrecision,
-            int numericScale, int datetimePrecision, boolean isPrimaryKey, int constraintOrdinalPosition)
+    public DataAttribute(String name, String comment, DataObject parentDataObject, int ordinalPosition, boolean isNullable, String dataType, BigInteger characterMaximumLength, Integer numericPrecision,
+            Integer numericScale, Integer datetimePrecision, boolean isPrimaryKey, Integer constraintOrdinalPosition)
     {
         //parent properties
         super(name, comment, DataObjectType.ATTRIBUTE, parentDataObject);
@@ -90,10 +90,9 @@ public class DataAttribute extends DataObject{
         this.comment = comment;
     }
     
-        /**
+    /**
      * Create a new data attribute that looks like information_schema.columns for text oriented data types.
      * @param name 
-     * @param comment
      * @param parentDataObject
      * @param ordinalPosition
      * @param isNullable
@@ -105,7 +104,7 @@ public class DataAttribute extends DataObject{
      * @since 1.0
      */
     public DataAttribute(String name, DataObject parentDataObject, int ordinalPosition, boolean isNullable, String dataType, BigInteger 
-            characterMaximumLength, boolean isPrimaryKey, int constraintOrdinalPosition)
+            characterMaximumLength, boolean isPrimaryKey, Integer constraintOrdinalPosition)
     {
         //parent properties
         super(name, DataObjectType.ATTRIBUTE, parentDataObject);
@@ -115,7 +114,7 @@ public class DataAttribute extends DataObject{
         this.dataType = dataType;
         this.characterMaximumLength = characterMaximumLength;
         this.isPrimaryKey = isPrimaryKey;
-        this.constraintOrdinalPosition = constraintOrdinalPosition;
+        this.constraintOrdinalPosition = constraintOrdinalPosition;  //set to -1 if n/a. Constraint ordinal positon will never be negative
     }
     
     /**
@@ -132,8 +131,8 @@ public class DataAttribute extends DataObject{
      * @see None
      * @since 1.0
      */
-    public DataAttribute(String name, DataObject parentDataObject, int ordinalPosition, boolean isNullable, String dataType, int numericPrecision,
-            int numericScale, boolean isPrimaryKey, int constraintOrdinalPosition)
+    public DataAttribute(String name, DataObject parentDataObject, int ordinalPosition, boolean isNullable, String dataType, Integer numericPrecision,
+            Integer numericScale, boolean isPrimaryKey, Integer constraintOrdinalPosition)
     {
         //parent properties
         super(name, DataObjectType.ATTRIBUTE, parentDataObject);
@@ -160,7 +159,7 @@ public class DataAttribute extends DataObject{
      * @see None
      * @since 1.0
      */
-    public DataAttribute(String name, DataObject parentDataObject, int ordinalPosition, boolean isNullable, String dataType, int datetimePrecision, boolean isPrimaryKey, int constraintOrdinalPosition)
+    public DataAttribute(String name, DataObject parentDataObject, int ordinalPosition, boolean isNullable, String dataType, Integer datetimePrecision, boolean isPrimaryKey, Integer constraintOrdinalPosition)
     {
         //parent properties
         super(name, DataObjectType.ATTRIBUTE, parentDataObject);
@@ -173,7 +172,7 @@ public class DataAttribute extends DataObject{
         this.constraintOrdinalPosition = constraintOrdinalPosition;
     }
     
-        /**
+    /**
      * Create a new data attribute that looks like information_schema.columns but only requires the basics like datatype etc. 
      * @param name 
      * @param parentDataObject
@@ -185,7 +184,7 @@ public class DataAttribute extends DataObject{
      * @see None
      * @since 1.0
      */
-    public DataAttribute(String name, DataObject parentDataObject, int ordinalPosition, boolean isNullable, String dataType, boolean isPrimaryKey, int constraintOrdinalPosition)
+    public DataAttribute(String name, DataObject parentDataObject, int ordinalPosition, boolean isNullable, String dataType, boolean isPrimaryKey, Integer constraintOrdinalPosition)
     {
         //parent properties
         super(name, DataObjectType.ATTRIBUTE, parentDataObject);
@@ -268,4 +267,70 @@ public class DataAttribute extends DataObject{
         return isBitSet(0);
     }
     
+      /**
+     * Update the current data attribute for text oriented data types.
+     * @param ordinalPosition
+     * @param isNullable
+     * @param dataType
+     * @param characterMaximumLength
+     * @param isPrimaryKey
+     * @param constraintOrdinalPosition
+     * @see None
+     * @since 1.0
+     */
+    public void setTextDataAttribute(int ordinalPosition, boolean isNullable, String dataType, BigInteger 
+            characterMaximumLength, boolean isPrimaryKey, Integer constraintOrdinalPosition)
+    {
+        this.ordinalPosition = ordinalPosition;
+        this.isNullable = isNullable;
+        this.dataType = dataType;
+        this.characterMaximumLength = characterMaximumLength;
+        this.isPrimaryKey = isPrimaryKey;
+        this.constraintOrdinalPosition = constraintOrdinalPosition;  //set to -1 if n/a. Constraint ordinal positon will never be negative...
+    }
+    
+    /**
+     * Update the current data attribute for numeric oriented data types
+     * @param ordinalPosition
+     * @param isNullable
+     * @param dataType
+     * @param numericPrecision
+     * @param numericScale
+     * @param isPrimaryKey
+     * @param constraintOrdinalPosition
+     * @see None
+     * @since 1.0
+     */
+    public void setNumericDataAttribute(int ordinalPosition, boolean isNullable, String dataType, Integer numericPrecision,
+            Integer numericScale, boolean isPrimaryKey, Integer constraintOrdinalPosition)
+    {
+        this.ordinalPosition = ordinalPosition;
+        this.isNullable = isNullable;
+        this.dataType = dataType;
+        this.numericPrecision = numericPrecision;
+        this.numericScale = numericScale;
+        this.isPrimaryKey = isPrimaryKey;
+        this.constraintOrdinalPosition = constraintOrdinalPosition;
+    }
+    
+    /**
+     * Update the current data attribute for date oriented data types
+     * @param ordinalPosition
+     * @param isNullable
+     * @param dataType
+     * @param datetimePrecision
+     * @param isPrimaryKey
+     * @param constraintOrdinalPosition
+     * @see None
+     * @since 1.0
+     */
+    public void setDateDataAttribute(int ordinalPosition, boolean isNullable, String dataType, Integer datetimePrecision, boolean isPrimaryKey, Integer constraintOrdinalPosition)
+    {
+        this.ordinalPosition = ordinalPosition;
+        this.isNullable = isNullable;
+        this.dataType = dataType;
+        this.datetimePrecision = datetimePrecision;
+        this.isPrimaryKey = isPrimaryKey;
+        this.constraintOrdinalPosition = constraintOrdinalPosition;
+    }
 }

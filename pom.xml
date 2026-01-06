@@ -28,6 +28,6 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.release>17</maven.compiler.release>
-        <exec.mainClass>com.mycompany.datarose.Datarose</exec.mainClass>
+        <exec.mainClass>com.jimtimexsinclair.datarose.Datarose</exec.mainClass>
     </properties>
 </project>
